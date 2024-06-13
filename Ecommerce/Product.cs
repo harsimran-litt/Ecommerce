@@ -34,7 +34,7 @@ namespace Ecommerce
 
         public void DecreaseStock(int amount)
         {
-            if (amount < 0) throw new ArgumentException("Enter poositive values only");
+            if (amount < 0) throw new ArgumentException("Enter positive values only");
             if (Stock - amount < 0) throw new InvalidOperationException("Stock is empty");
             Stock -= amount;
         }
