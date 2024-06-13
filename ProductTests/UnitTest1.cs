@@ -1,10 +1,11 @@
+using System;
 using NUnit.Framework;
 using Ecommerce;
 
 namespace ProductTests
 {
     [TestFixture]
-    public class Tests
+    public class ProductTests
     {
         [SetUp]
         public void Setup()
@@ -14,126 +15,280 @@ namespace ProductTests
         [Test]
         public void ProductID_ShouldSetCorrectly()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.That(product.ProductID, Is.EqualTo(1));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
+            Assert.That(product.ProductID, Is.EqualTo(productId));
         }
 
         [Test]
         public void ProductID_ShouldThrowExceptionForNegativeValue()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Product(-1, "Test Product", 100.0m, 10));
+            // Arrange
+            int productId = -1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act & Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Product(productId, productName, price, stock));
         }
 
         [Test]
         public void ProductID_ShouldBeWithinValidRange()
         {
-            var product = new Product(5000, "Test Product", 100.0m, 10);
+            // Arrange
+            int productId = 5000;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
             Assert.That(product.ProductID, Is.InRange(1, 10000));
         }
 
         [Test]
         public void ProductName_ShouldSetCorrectly()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.That(product.ProductName, Is.EqualTo("Test Product"));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
+            Assert.That(product.ProductName, Is.EqualTo(productName));
         }
 
         [Test]
         public void ProductName_ShouldThrowExceptionForEmptyValue()
         {
-            Assert.Throws<ArgumentException>(() => new Product(1, "", 100.0m, 10));
+            // Arrange
+            int productId = 1;
+            string productName = "";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => new Product(productId, productName, price, stock));
         }
 
         [Test]
         public void ProductName_ShouldBeValid()
         {
-            var product = new Product(1, "Valid Name", 100.0m, 10);
+            // Arrange
+            int productId = 1;
+            string productName = "Valid Name";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
             Assert.That(product.ProductName.Length, Is.InRange(1, 50));
         }
 
         [Test]
         public void Price_ShouldSetCorrectly()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.That(product.Price, Is.EqualTo(100.0m));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
+            Assert.That(product.Price, Is.EqualTo(price));
         }
 
         [Test]
         public void Price_ShouldThrowExceptionForNegativeValue()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Product(1, "Test Product", -100.0m, 10));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = -100.0m;
+            int stock = 10;
+
+            // Act & Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Product(productId, productName, price, stock));
         }
 
         [Test]
         public void Price_ShouldBeWithinValidRange()
         {
-            var product = new Product(1, "Test Product", 5000.0m, 10);
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 5000.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
             Assert.That(product.Price, Is.InRange(1, 5000));
         }
 
         [Test]
         public void Stock_ShouldSetCorrectly()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.That(product.Stock, Is.EqualTo(10));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 10;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
+            Assert.That(product.Stock, Is.EqualTo(stock));
         }
 
         [Test]
         public void Stock_ShouldThrowExceptionForNegativeValue()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Product(1, "Test Product", 100.0m, -10));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = -10;
+
+            // Act & Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Product(productId, productName, price, stock));
         }
 
         [Test]
         public void Stock_ShouldBeWithinValidRange()
         {
-            var product = new Product(1, "Test Product", 100.0m, 100000);
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int stock = 100000;
+
+            // Act
+            var product = new Product(productId, productName, price, stock);
+
+            // Assert
             Assert.That(product.Stock, Is.InRange(1, 100000));
         }
 
         [Test]
         public void IncreaseStock_ShouldWorkCorrectly()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            product.IncreaseStock(5);
-            Assert.That(product.Stock, Is.EqualTo(15));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int initialStock = 10;
+            int increaseAmount = 5;
+            var product = new Product(productId, productName, price, initialStock);
+
+            // Act
+            product.IncreaseStock(increaseAmount);
+
+            // Assert
+            Assert.That(product.Stock, Is.EqualTo(initialStock + increaseAmount));
         }
 
         [Test]
         public void IncreaseStock_ShouldThrowExceptionForNegativeAmount()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.Throws<ArgumentException>(() => product.IncreaseStock(-5));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int initialStock = 10;
+            int increaseAmount = -5;
+            var product = new Product(productId, productName, price, initialStock);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => product.IncreaseStock(increaseAmount));
         }
 
         [Test]
         public void IncreaseStock_ShouldHandleZero()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            product.IncreaseStock(0);
-            Assert.That(product.Stock, Is.EqualTo(10));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int initialStock = 10;
+            int increaseAmount = 0;
+            var product = new Product(productId, productName, price, initialStock);
+
+            // Act
+            product.IncreaseStock(increaseAmount);
+
+            // Assert
+            Assert.That(product.Stock, Is.EqualTo(initialStock));
         }
 
         [Test]
         public void DecreaseStock_ShouldWorkCorrectly()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            product.DecreaseStock(5);
-            Assert.That(product.Stock, Is.EqualTo(5));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int initialStock = 10;
+            int decreaseAmount = 5;
+            var product = new Product(productId, productName, price, initialStock);
+
+            // Act
+            product.DecreaseStock(decreaseAmount);
+
+            // Assert
+            Assert.That(product.Stock, Is.EqualTo(initialStock - decreaseAmount));
         }
 
         [Test]
         public void DecreaseStock_ShouldThrowExceptionForInsufficientStock()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.Throws<InvalidOperationException>(() => product.DecreaseStock(15));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int initialStock = 10;
+            int decreaseAmount = 15;
+            var product = new Product(productId, productName, price, initialStock);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => product.DecreaseStock(decreaseAmount));
         }
 
         [Test]
         public void DecreaseStock_ShouldThrowExceptionForNegativeAmount()
         {
-            var product = new Product(1, "Test Product", 100.0m, 10);
-            Assert.Throws<ArgumentException>(() => product.DecreaseStock(-5));
+            // Arrange
+            int productId = 1;
+            string productName = "Test Product";
+            decimal price = 100.0m;
+            int initialStock = 10;
+            int decreaseAmount = -5;
+            var product = new Product(productId, productName, price, initialStock);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => product.DecreaseStock(decreaseAmount));
         }
     }
 }
